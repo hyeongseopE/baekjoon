@@ -1,68 +1,40 @@
-import java.util.*;
 import java.io.*;
-
+import java.util.*;
+import java.util.Stack;
 
 
 public class Main {
 
-    public static void main (String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Stack<Character> stackChar = new Stack<>();
+        StringTokenizer st;
         StringBuilder sb = new StringBuilder();
 
-        int cnt = Integer.parseInt(br.readLine());
 
-        int interrupt = 0 ;
+        int n = Integer.parseInt(br.readLine());
 
-
-        for (int i = 0; i < cnt; i++ ){
-
-            String s = br.readLine();
-
-            for (int j = 0; j < s.length(); j++ ){
-
-                char psp = s.charAt(j);
-
-                if (stackChar.isEmpty() && psp == ')'){
-
-                    sb.append("NO"+"\n");
-
-                    interrupt = 1;
-
-                    break;
-
+        for (int i = 0; i < n; i++) {
+            String input = br.readLine();
+            Stack<String> stack = new Stack<>();
+            for (int j = 0; j < input.length(); j++) {
+                if(input.charAt(j) == '('){
+                    stack.add("(");
                 }
-
-                stackChar.push(psp);
-
-                if (!stackChar.isEmpty() && psp == ')'){
-
-                    stackChar.pop();
-                    stackChar.pop();
-
+                if(input.charAt(j) == ')'){
+                    if(stack.size()>0 && stack.peek().equals("(")){
+                        stack.pop();
+                    }else{
+                        stack.add(")");
+                    }
                 }
-
             }
-
-            if (stackChar.isEmpty() && interrupt == 0){
-
-                sb.append("YES"+"\n");
-
-            }else if(interrupt == 0) {
-
-                sb.append("NO"+"\n");
-
-            }
-
-            stackChar.clear();
-
-            interrupt = 0;
-
+            if(stack.isEmpty()){sb.append("YES\n");}
+            else{sb.append("NO\n");}
         }
 
         System.out.println(sb);
 
-
-
     }
 }
+
+
