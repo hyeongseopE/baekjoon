@@ -1,0 +1,5 @@
+-- 코드를 입력하세요
+SELECT b.ANIMAL_ID, b.ANIMAL_TYPE, b.NAME
+FROM ANIMAL_INS a inner join ANIMAL_OUTS b on a.ANIMAL_ID = b.ANIMAL_ID
+WHERE a.SEX_UPON_INTAKE LIKE 'intact%' and a.SEX_UPON_INTAKE <> b.SEX_UPON_OUTCOME
+order by b.ANIMAL_ID asc
